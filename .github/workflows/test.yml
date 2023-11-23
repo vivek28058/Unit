@@ -34,4 +34,4 @@ jobs:
       run: npm run test:bdd
 
     - name: report
-      run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.html
+      run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
