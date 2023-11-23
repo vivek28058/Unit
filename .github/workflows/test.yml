@@ -1,0 +1,35 @@
+name: Node.js CI/CD with NPM
+ 
+on:
+  push:
+    branches:
+      - master
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+ 
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # You can adjust the version as needed
+ 
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install packages
+      run: npm ci
+
+    - name: Install mocha
+      run: npm install -g mochawesome mochawesome-report-generator
+      
+    - name: unit test
+      run: npm run test:unit 
+
+    - name: BDD test
+      run: npm run test:bdd
+      
