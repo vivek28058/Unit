@@ -1,0 +1,51 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test:unit": "mocha *.test.js --require babel-register --reporter mochawesome",
+    "test:bdd": "cucumber-js --require-module babel-register",
+    "test:atdd": "mocha acceptance/*.atdd.js --require babel-register --reporter mochawesome",
+    "lint": "standard *.js --fix",
+    "test": "npm run test:unit && npm run test:bdd && npm run test:atdd && npm run lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "cucumber": "^4.2.1",
+    "mocha": "^7.0.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-report-generator": "^6.2.0",
+    "nyc": "^12.0.2",
+    "selenium-webdriver": "^4.0.0-alpha.1",
+    "standard": "^11.0.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "shippedProposals": true
+        }
+      ]
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "mocha": true
+    }
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-23T08:33:47.391Z",
+    "end": "2023-11-23T08:33:53.262Z",
+    "duration": 5871,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "302e8aab-381a-42e0-ac26-ffd99a129ad2",
+      "title": "",
+      "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+      "file": "\\acceptance\\api.atdd.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "70c9da6f-fef8-42de-8b28-7c16e95112a6",
+          "title": "Calc API",
+          "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+          "file": "\\acceptance\\api.atdd.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook",
+              "fullTitle": "Calc API \"before each\" hook",
+              "timedOut": false,
+              "duration": 1278,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+              "err": {},
+              "uuid": "f0e5a8d5-01f3-4e5d-a7be-62fb9c7f1228",
+              "parentUUID": "70c9da6f-fef8-42de-8b28-7c16e95112a6",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook",
+              "fullTitle": "Calc API \"after each\" hook",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+              "err": {},
+              "uuid": "0ca4be35-ec91-409b-9011-7a89e638e3e8",
+              "parentUUID": "70c9da6f-fef8-42de-8b28-7c16e95112a6",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "834f87b6-7614-4f27-9d5d-ffe26b619299",
+              "title": "#add",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+              "file": "\\acceptance\\api.atdd.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook",
+                  "fullTitle": "Calc API #add \"before each\" hook",
+                  "timedOut": false,
+                  "duration": 58,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "2fd143a4-f44b-4575-a4c5-7c48c800c40d",
+                  "parentUUID": "834f87b6-7614-4f27-9d5d-ffe26b619299",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add two arguments",
+                  "fullTitle": "Calc API #add should add two arguments",
+                  "timedOut": false,
+                  "duration": 39,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "d743ecd1-5eff-4315-862c-4b4638584455",
+                  "parentUUID": "834f87b6-7614-4f27-9d5d-ffe26b619299",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "d743ecd1-5eff-4315-862c-4b4638584455"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 39,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "3491cc92-f368-4d26-af1a-fe34d24ae14f",
+              "title": "#subtract",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+              "file": "\\acceptance\\api.atdd.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook",
+                  "fullTitle": "Calc API #subtract \"before each\" hook",
+                  "timedOut": false,
+                  "duration": 52,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "a4f7dd21-b5e2-4901-8508-322ba6f7476a",
+                  "parentUUID": "3491cc92-f368-4d26-af1a-fe34d24ae14f",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add two arguments",
+                  "fullTitle": "Calc API #subtract should add two arguments",
+                  "timedOut": false,
+                  "duration": 42,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "f1165f10-dcfc-4d83-925e-e79e7cbd2c4b",
+                  "parentUUID": "3491cc92-f368-4d26-af1a-fe34d24ae14f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f1165f10-dcfc-4d83-925e-e79e7cbd2c4b"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 42,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "0bb1fb2a-7f66-4d2a-95d4-cbed5d2925e4",
+              "title": "#multiply",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+              "file": "\\acceptance\\api.atdd.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook",
+                  "fullTitle": "Calc API #multiply \"before each\" hook",
+                  "timedOut": false,
+                  "duration": 57,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "04f2d44d-156e-44d8-bed0-fc14cc2bfd01",
+                  "parentUUID": "0bb1fb2a-7f66-4d2a-95d4-cbed5d2925e4",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add two arguments",
+                  "fullTitle": "Calc API #multiply should add two arguments",
+                  "timedOut": false,
+                  "duration": 35,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "f9ce82f1-74e0-4413-9f3a-bcf93c25663e",
+                  "parentUUID": "0bb1fb2a-7f66-4d2a-95d4-cbed5d2925e4",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f9ce82f1-74e0-4413-9f3a-bcf93c25663e"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 35,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "8d9098d8-a1a9-41cd-818e-933b641b5527",
+              "title": "#divide",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
+              "file": "\\acceptance\\api.atdd.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook",
+                  "fullTitle": "Calc API #divide \"before each\" hook",
+                  "timedOut": false,
+                  "duration": 55,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "3fe6026d-2753-439f-875d-8895e7a5984a",
+                  "parentUUID": "8d9098d8-a1a9-41cd-818e-933b641b5527",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add two arguments",
+                  "fullTitle": "Calc API #divide should add two arguments",
+                  "timedOut": false,
+                  "duration": 34,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
+                  "err": {},
+                  "uuid": "b3fcbc63-32a4-435d-93b5-39155f164fb2",
+                  "parentUUID": "8d9098d8-a1a9-41cd-818e-933b641b5527",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "b3fcbc63-32a4-435d-93b5-39155f164fb2"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 34,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
