@@ -31,7 +31,13 @@ jobs:
       run: npm run test:unit --logger mochawesome.json
 
     - name: BDD test
-      run: npm run test:bdd
+      run: npm run test:bdd --logger "trx;LogFileName=bddtest.trx"
 
     - name: report
       run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        trx_files: "*/TestResults/bddtest.trx"
