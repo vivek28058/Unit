@@ -28,7 +28,7 @@ jobs:
       run: npm install -g mochawesome mochawesome-report-generator
       
     - name: unit test
-      run: npm run test:unit 
+      run: npm run test:unit --logger mochawesome.json
 
     - name: BDD test
       run: npm run test:bdd
