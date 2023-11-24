@@ -41,6 +41,6 @@ jobs:
       if: always()
       with:
        files: |
-         test-results//home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
+         test-results/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
          #test-results/**/*.trx
         # test-results/**/*.json
