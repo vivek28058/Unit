@@ -1,0 +1,238 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-28T15:10:05.052Z",
+    "end": "2023-11-28T15:10:05.059Z",
+    "duration": 7,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2697ef51-f572-4c29-8f5b-194d1515f825",
+      "title": "",
+      "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+      "file": "\\calc.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "125afc35-5f60-4183-94a3-c4fd8e820fcd",
+          "title": "calc.js",
+          "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+          "file": "\\calc.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "490d18eb-2d9b-4d3f-9fd6-6b3b08f1ae24",
+              "title": "#add",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+              "file": "\\calc.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add two arguments together",
+                  "fullTitle": "calc.js #add should add two arguments together",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "(0, _chai.assert)((0, _calc.add)(int1, int2) === int1 + int2);\ndone();",
+                  "err": {},
+                  "uuid": "f234b323-45a0-45c4-9b62-1bbb5cd17321",
+                  "parentUUID": "490d18eb-2d9b-4d3f-9fd6-6b3b08f1ae24",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f234b323-45a0-45c4-9b62-1bbb5cd17321"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "65ae5bb2-8bb4-44f9-b691-6d5c2cff4617",
+              "title": "#subtract",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+              "file": "\\calc.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should subtract arg 2 from arg 1",
+                  "fullTitle": "calc.js #subtract should subtract arg 2 from arg 1",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "(0, _chai.assert)((0, _calc.subtract)(int1, int2) === int1 - int2);\ndone();",
+                  "err": {},
+                  "uuid": "6e9813b8-d2f7-48b7-b5b6-501208effdc3",
+                  "parentUUID": "65ae5bb2-8bb4-44f9-b691-6d5c2cff4617",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "6e9813b8-d2f7-48b7-b5b6-501208effdc3"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "e895c8d2-afa0-47e2-bf32-dedf40a56328",
+              "title": "#multiply",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+              "file": "\\calc.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should multiply two arguments",
+                  "fullTitle": "calc.js #multiply should multiply two arguments",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "(0, _chai.assert)((0, _calc.multiply)(int1, int2) === int1 * int2);\ndone();",
+                  "err": {},
+                  "uuid": "c5a94d0e-f9d0-4045-bef0-6072209fd313",
+                  "parentUUID": "e895c8d2-afa0-47e2-bf32-dedf40a56328",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "c5a94d0e-f9d0-4045-bef0-6072209fd313"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "344158f8-2b92-469d-9de9-0f4818875858",
+              "title": "#divide",
+              "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\calc.test.js",
+              "file": "\\calc.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should divide arg 1 by arg 2",
+                  "fullTitle": "calc.js #divide should divide arg 1 by arg 2",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "(0, _chai.assert)((0, _calc.divide)(int1, int2) === int1 / int2);\ndone();",
+                  "err": {},
+                  "uuid": "8c6f72a4-9fc7-4fd9-8fe7-08ee79486239",
+                  "parentUUID": "344158f8-2b92-469d-9de9-0f4818875858",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "8c6f72a4-9fc7-4fd9-8fe7-08ee79486239"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochawesome-unit"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

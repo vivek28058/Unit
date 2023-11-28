@@ -4,14 +4,16 @@ import { expect } from 'chai'
 let driver
 const int1 = 10
 const int2 = 5
-const {exec} = require("child_process")
+const {exec} = require("child_process") //pass command to execute the Process
 
 describe('Calc API', () => {
-    before(async()=>{
-    exec("npm start")
+  before(async()=>{
+    exec("npm start")   //Start the npm Server 
   })
   after(async()=>{
-    process.exit()
+    setTimeout(async()=>{
+      process.exit()  //terminate the server once the Job is done Time set 
+    },10 * 1000)
   })
   beforeEach(async () => {
     driver = await new Builder().forBrowser('chrome').build()
