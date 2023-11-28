@@ -25,7 +25,7 @@ jobs:
       run: npm install -g mochawesome mochawesome-report-generator
       
     - name: unit test
-      run: npm run test:unit --logger mochawesome.json
+      run: npm run test:unit
 
     - name: BDD test
       run: npm run test:bdd
@@ -33,11 +33,4 @@ jobs:
     - name: Atdd test
       run: npm run test:atdd 
       
-    - name: report
-      run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
-      
-    - uses: deblockt/cucumber-report-annotations-action@v1.7
-      with:
-        access-token: ${{ secrets.GITHUB_TOKEN }}
-        path: "/home/runner/work/Unit/Unit/mochawesome-report/cucumber-report.json"
 
