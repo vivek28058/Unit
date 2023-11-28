@@ -4,8 +4,15 @@ import { expect } from 'chai'
 let driver
 const int1 = 10
 const int2 = 5
+const {exec} = require("child_process")
 
 describe('Calc API', () => {
+    before(async()=>{
+    exec("npm start")
+  })
+  after(async()=>{
+    process.exit()
+  })
   beforeEach(async () => {
     driver = await new Builder().forBrowser('chrome').build()
   })
