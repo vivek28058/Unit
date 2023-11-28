@@ -5,9 +5,9 @@
     "passes": 4,
     "pending": 0,
     "failures": 0,
-    "start": "2023-11-28T14:10:59.636Z",
-    "end": "2023-11-28T14:11:05.084Z",
-    "duration": 5448,
+    "start": "2023-11-28T14:26:15.459Z",
+    "end": "2023-11-28T14:26:23.685Z",
+    "duration": 8226,
     "testsRegistered": 4,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "e33537f8-0411-47de-8b0a-ec1800adff0d",
+      "uuid": "878965a9-8ff7-4853-899d-3d13a4df9c7c",
       "title": "",
       "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
       "file": "\\acceptance\\api.atdd.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "7255fd27-e792-4492-b154-2e634923a698",
+          "uuid": "2c2ec016-4f1c-41fa-8e2b-5f2727d7e40b",
           "title": "Calc API",
           "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
           "file": "\\acceptance\\api.atdd.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook",
               "fullTitle": "Calc API \"before all\" hook",
               "timedOut": false,
-              "duration": 11,
+              "duration": 15,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
               "err": {},
-              "uuid": "9d986cb5-f471-408a-94f4-6afa39e582b1",
-              "parentUUID": "7255fd27-e792-4492-b154-2e634923a698",
+              "uuid": "0296b088-1764-4d21-909b-5d4ed0c5fd2c",
+              "parentUUID": "2c2ec016-4f1c-41fa-8e2b-5f2727d7e40b",
               "isHook": true,
               "skipped": false
             },
@@ -54,7 +54,7 @@
               "title": "\"before each\" hook",
               "fullTitle": "Calc API \"before each\" hook",
               "timedOut": false,
-              "duration": 1240,
+              "duration": 1498,
               "state": null,
               "speed": null,
               "pass": false,
@@ -63,8 +63,8 @@
               "context": null,
               "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
               "err": {},
-              "uuid": "0fe7434d-7211-48a7-9e56-79c438047d94",
-              "parentUUID": "7255fd27-e792-4492-b154-2e634923a698",
+              "uuid": "7ce7ca50-d1f1-4ab6-b8b2-39871265881d",
+              "parentUUID": "2c2ec016-4f1c-41fa-8e2b-5f2727d7e40b",
               "isHook": true,
               "skipped": false
             }
@@ -83,8 +83,8 @@
               "context": null,
               "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
               "err": {},
-              "uuid": "725e5f2c-de74-49b6-8be1-6708ba8af837",
-              "parentUUID": "7255fd27-e792-4492-b154-2e634923a698",
+              "uuid": "e9abfef6-ac35-41fa-9fa5-eea9d1201a54",
+              "parentUUID": "2c2ec016-4f1c-41fa-8e2b-5f2727d7e40b",
               "isHook": true,
               "skipped": false
             },
@@ -101,8 +101,8 @@
               "context": null,
               "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
               "err": {},
-              "uuid": "bd9788c8-59ed-4e60-a4ff-0503d2880f39",
-              "parentUUID": "7255fd27-e792-4492-b154-2e634923a698",
+              "uuid": "da27215a-8032-4efb-9200-6e52dbb05b15",
+              "parentUUID": "2c2ec016-4f1c-41fa-8e2b-5f2727d7e40b",
               "isHook": true,
               "skipped": false
             }
@@ -110,7 +110,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "82b2e2b5-a8f8-4e83-8350-dc3fb392cabb",
+              "uuid": "324971b1-8e3b-4c4f-ba87-c1273ecd23c5",
               "title": "#add",
               "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
               "file": "\\acceptance\\api.atdd.js",
@@ -119,7 +119,7 @@
                   "title": "\"before each\" hook",
                   "fullTitle": "Calc API #add \"before each\" hook",
                   "timedOut": false,
-                  "duration": 61,
+                  "duration": 1350,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -128,8 +128,8 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "1848380d-b42f-4fe3-bd37-0edf824491ab",
-                  "parentUUID": "82b2e2b5-a8f8-4e83-8350-dc3fb392cabb",
+                  "uuid": "b3712b92-9047-4047-a4e6-46f66ffcf38c",
+                  "parentUUID": "324971b1-8e3b-4c4f-ba87-c1273ecd23c5",
                   "isHook": true,
                   "skipped": false
                 }
@@ -140,7 +140,7 @@
                   "title": "should add two arguments",
                   "fullTitle": "Calc API #add should add two arguments",
                   "timedOut": false,
-                  "duration": 48,
+                  "duration": 49,
                   "state": "passed",
                   "speed": "medium",
                   "pass": true,
@@ -149,26 +149,26 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "0a145887-151c-419d-9dce-5322f1d35d5b",
-                  "parentUUID": "82b2e2b5-a8f8-4e83-8350-dc3fb392cabb",
+                  "uuid": "dac51af6-4f1b-4192-b4f8-e0e3a7b4e61a",
+                  "parentUUID": "324971b1-8e3b-4c4f-ba87-c1273ecd23c5",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "0a145887-151c-419d-9dce-5322f1d35d5b"
+                "dac51af6-4f1b-4192-b4f8-e0e3a7b4e61a"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 48,
+              "duration": 49,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "bc5f4a80-4cf3-48cc-ad85-b8407cc4d02a",
+              "uuid": "16912068-b6bf-41d3-b404-3ddcd9302598",
               "title": "#subtract",
               "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
               "file": "\\acceptance\\api.atdd.js",
@@ -177,7 +177,7 @@
                   "title": "\"before each\" hook",
                   "fullTitle": "Calc API #subtract \"before each\" hook",
                   "timedOut": false,
-                  "duration": 62,
+                  "duration": 142,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -186,8 +186,8 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "2abc81af-ac01-42a7-aa14-0e5caae8077f",
-                  "parentUUID": "bc5f4a80-4cf3-48cc-ad85-b8407cc4d02a",
+                  "uuid": "b51bef9e-962a-4cb9-b83a-4bf2ceca5392",
+                  "parentUUID": "16912068-b6bf-41d3-b404-3ddcd9302598",
                   "isHook": true,
                   "skipped": false
                 }
@@ -198,35 +198,35 @@
                   "title": "should add two arguments",
                   "fullTitle": "Calc API #subtract should add two arguments",
                   "timedOut": false,
-                  "duration": 34,
+                  "duration": 69,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "7359a41b-f3e8-4fa7-9ddd-861b5c7657e6",
-                  "parentUUID": "bc5f4a80-4cf3-48cc-ad85-b8407cc4d02a",
+                  "uuid": "e687f006-eb22-4655-8f31-ce1db74e92e8",
+                  "parentUUID": "16912068-b6bf-41d3-b404-3ddcd9302598",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "7359a41b-f3e8-4fa7-9ddd-861b5c7657e6"
+                "e687f006-eb22-4655-8f31-ce1db74e92e8"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 34,
+              "duration": 69,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "67d4b0a8-28bc-4724-8ca5-9e3157037a4a",
+              "uuid": "70f3dc9b-0ef1-431d-adef-d49d3dd53dda",
               "title": "#multiply",
               "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
               "file": "\\acceptance\\api.atdd.js",
@@ -235,7 +235,7 @@
                   "title": "\"before each\" hook",
                   "fullTitle": "Calc API #multiply \"before each\" hook",
                   "timedOut": false,
-                  "duration": 72,
+                  "duration": 98,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -244,8 +244,8 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "08efc111-00fc-4e94-a888-c31f72ecc12c",
-                  "parentUUID": "67d4b0a8-28bc-4724-8ca5-9e3157037a4a",
+                  "uuid": "0159f250-f9b3-4814-89bb-6fb7d397efe1",
+                  "parentUUID": "70f3dc9b-0ef1-431d-adef-d49d3dd53dda",
                   "isHook": true,
                   "skipped": false
                 }
@@ -256,7 +256,7 @@
                   "title": "should add two arguments",
                   "fullTitle": "Calc API #multiply should add two arguments",
                   "timedOut": false,
-                  "duration": 40,
+                  "duration": 66,
                   "state": "passed",
                   "speed": "medium",
                   "pass": true,
@@ -265,26 +265,26 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "d71ece4d-cba8-44f9-af52-b26b6e8fb108",
-                  "parentUUID": "67d4b0a8-28bc-4724-8ca5-9e3157037a4a",
+                  "uuid": "75b681ae-d2c3-4a7d-9572-e173a7fff3de",
+                  "parentUUID": "70f3dc9b-0ef1-431d-adef-d49d3dd53dda",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "d71ece4d-cba8-44f9-af52-b26b6e8fb108"
+                "75b681ae-d2c3-4a7d-9572-e173a7fff3de"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 40,
+              "duration": 66,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "314544a4-7f9b-42de-ae03-6f7cad080fb5",
+              "uuid": "755de95c-e2aa-493b-b276-c76f20dcce19",
               "title": "#divide",
               "fullFile": "C:\\Users\\Admin\\Downloads\\tdd-bdd-atdd-example-master\\acceptance\\api.atdd.js",
               "file": "\\acceptance\\api.atdd.js",
@@ -293,7 +293,7 @@
                   "title": "\"before each\" hook",
                   "fullTitle": "Calc API #divide \"before each\" hook",
                   "timedOut": false,
-                  "duration": 77,
+                  "duration": 199,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -302,8 +302,8 @@
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "481e8c34-37f4-403b-872e-ede5a3cbc957",
-                  "parentUUID": "314544a4-7f9b-42de-ae03-6f7cad080fb5",
+                  "uuid": "fb23e743-d659-4516-9dea-c35683cdf2ae",
+                  "parentUUID": "755de95c-e2aa-493b-b276-c76f20dcce19",
                   "isHook": true,
                   "skipped": false
                 }
@@ -314,29 +314,29 @@
                   "title": "should add two arguments",
                   "fullTitle": "Calc API #divide should add two arguments",
                   "timedOut": false,
-                  "duration": 34,
+                  "duration": 50,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); });",
                   "err": {},
-                  "uuid": "89460e39-3900-46fe-b7a2-010b54c2540f",
-                  "parentUUID": "314544a4-7f9b-42de-ae03-6f7cad080fb5",
+                  "uuid": "f982b8b8-cc26-40ae-b97b-fd8e0e1a9ece",
+                  "parentUUID": "755de95c-e2aa-493b-b276-c76f20dcce19",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "89460e39-3900-46fe-b7a2-010b54c2540f"
+                "f982b8b8-cc26-40ae-b97b-fd8e0e1a9ece"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 34,
+              "duration": 50,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
@@ -369,7 +369,7 @@
     "mochawesome": {
       "options": {
         "quiet": false,
-        "reportFilename": "mochawesome",
+        "reportFilename": "atddreport",
         "saveHtml": true,
         "saveJson": true,
         "consoleReporter": "spec",
@@ -379,7 +379,9 @@
       "version": "7.1.3"
     },
     "marge": {
-      "options": null,
+      "options": {
+        "reportFilename": "atddreport"
+      },
       "version": "6.2.0"
     }
   }
