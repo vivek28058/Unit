@@ -28,7 +28,7 @@ jobs:
       run: npm run test:unit --logger mochawesome.json
 
     - name: BDD test
-      run: npm run test:bdd  --logger cucumber-report.json
+      run: npm run test:bdd
 
     - name: Atdd test
       run: npm run test:atdd 
