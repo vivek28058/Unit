@@ -30,6 +30,9 @@ jobs:
     - name: BDD test
       run: npm run test:bdd  --logger cucumber-report.json
 
+    - name: Atdd test
+      run: npm run test:atdd
+
     - name: report
       run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
       
