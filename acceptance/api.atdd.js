@@ -34,7 +34,7 @@ describe('Calc API', () => {
 
   describe('#subtract', () => {
     beforeEach(async () => {
-      await driver.get(`http://localhost:1337/subtract?int1=${int1}&int2=${int2}`)
+      await driver.get(`http://localhost:133/subtract?int1=${int1}&int2=${int2}`)
     })
     it('should add two arguments', async () => {
       const h1 = await driver.findElement(By.css('h1'))
