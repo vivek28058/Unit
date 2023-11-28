@@ -20,6 +20,7 @@ describe('Calc API', () => {
   afterEach(async () => {
     driver.quit()
   })
+  })
   describe('#add', () => {
     beforeEach(async () => {
       await driver.get(`http://localhost:1337/add?int1=${int1}&int2=${int2}`)
