@@ -39,7 +39,7 @@ describe('Calc API', () => {
     it('should add two arguments', async () => {
       const h1 = await driver.findElement(By.css('h1'))
       const value = await h1.getAttribute('innerText')
-      expect(value).to.equal(`${int1} - ${int1} = ${int1 - int1}`)
+      expect(value).to.equal(`${int1} - ${int2} = ${int1 - int2}`)
     })
   })
 
