@@ -38,6 +38,3 @@ jobs:
         access-token: ${{ secrets.GITHUB_TOKEN }}
         path: "/home/runner/work/Unit/Unit/mochawesome-report/cucumber-report.json"
 
-    - name: report
-      run: cat	/home/runner/work/Unit/Unit/mochawesome-report/cucumber-report.json
-
