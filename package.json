@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
+<<<<<<< HEAD
     "test:unit": "mocha *.test.js --require babel-register --reporter mochawesome --reporter-options reportFilename=unitreport",
+=======
+    "test:unit": "mocha *.test.js --require babel-register --reporter mochawesome --reporter-options reportDir=mochawesome-unit",
+>>>>>>> e44baddc63800a28f0e01e16cba5ca6cd0d52dd2
     "test:bdd": "cucumber-js --require-module babel-register",
     "test:atdd": "mocha acceptance/*.atdd.js --require babel-register --reporter mochawesome --reporter-options reportFilename=atddreport",
     "lint": "standard *.js --fix",

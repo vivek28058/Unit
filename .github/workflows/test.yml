@@ -1,0 +1,43 @@
+name: Node.js CI/CD with NPM
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+ 
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # You can adjust the version as needed
+ 
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install mocha
+      run: npm install -g mochawesome mochawesome-report-generator
+      
+    - name: unit test
+      run: npm run test:unit --logger mochawesome.json
+
+    - name: BDD test
+      run: npm run test:bdd  --logger cucumber-report.json
+
+    - name: Atdd test
+      run: npm run test:atdd 
+
+    - name: report
+      run: cat	/home/runner/work/Unit/Unit/mochawesome-report/mochawesome.json
+      
+    - uses: deblockt/cucumber-report-annotations-action@v1.7
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+        path: "/home/runner/work/Unit/Unit/mochawesome-report/cucumber-report.json"
+
