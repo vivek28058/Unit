@@ -4,15 +4,15 @@ import { expect } from 'chai'
 let driver
 const int1 = 10
 const int2 = 5
-const {exec} = require("child_process") //pass command to execute the Process
+const {exec} = require("child_process")
 
 describe('Calc API', () => {
   before(async()=>{
-    exec("npm start")   //Start the npm Server 
+    exec("npm start") 
   })
   after(async()=>{
     setTimeout(async()=>{
-      process.exit()  //terminate the server once the Job is done Time set 
+      process.exit()
     },10 * 1000)
   })
   beforeEach(async () => {
