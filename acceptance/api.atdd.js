@@ -13,7 +13,7 @@ describe('Calc API', () => {
   after(async()=>{
     setTimeout(async()=>{
       process.exit()
-    },10 * 1000)
+    }
   })
   beforeEach(async () => {
     driver = await new Builder().forBrowser('chrome').build()
