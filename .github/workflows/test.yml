@@ -8,29 +8,43 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
- 
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
- 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # You can adjust the version as needed
- 
-    - name: Install dependencies
-      run: npm install
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APPID }}
+          private-key: ${{ secrets.PRIVATEKEY }}
 
-    - name: Install mocha
-      run: npm install -g mochawesome mochawesome-report-generator
+      - name: Use the token
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          gh api octocat
+ 
       
-    - name: unit test
-      run: npm run test:unit
+      - name: Checkout code
+        uses: actions/checkout@v2
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # You can adjust the version as needed
+ 
+      - name: Install dependencies
+        run: npm install
 
-    - name: BDD test
-      run: npm run test:bdd
+      - name: Install mocha
+        run: npm install -g mochawesome mochawesome-report-generator
+      
+      - name: unit test
+        run: npm run test:unit
 
-    - name: Atdd test
-      run: npm run test:atdd 
+      - name: BDD test
+        run: npm run test:bdd
+
+      - name: Atdd test
+        run: npm run test:atdd 
       
 
