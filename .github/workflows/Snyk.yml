@@ -42,8 +42,28 @@ jobs:
       - name: BDD test
         run: npm run test:bdd
 
+ ## Snyk integration
+
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+
+ ## Sonar Cloud Integration
+
+      - name: Install SonarCloud Scanner
+        run: npm install -g sonar-scanner
+
+      - name: Run SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token stored as a GitHub secret
+        run: |
+          sonar-scanner \
+          -Dsonar.projectKey=your_project_key \
+          -Dsonar.organization=your_organization_key \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+       
