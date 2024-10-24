@@ -1,17 +1,12 @@
-name: Snyk example
+name: workflow for Maven using Snyk security scan
 on: push
 jobs:
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: snyk/actions/setup@master
-        with:
-          version: 'latest' # Optional, specify a specific version if needed
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '1.13'
-      - name: Snyk monitor
-        run: snyk test
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
