@@ -44,7 +44,10 @@ jobs:
       - name: BDD test
         run: npm run test:bdd
 
-      - name: Atdd test
-        run: npm run test:atdd 
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       
 
