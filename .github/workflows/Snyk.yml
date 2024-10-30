@@ -44,11 +44,11 @@ jobs:
 
  ## Snyk integration
 
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+     # - name: Run Snyk to check for vulnerabilities
+      #  uses: snyk/actions/maven@master
+       # continue-on-error: true
+       # env:
+       #   SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
 
  ## Sonar Cloud Integration
 
@@ -58,18 +58,27 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install SonarCloud Scanner
-        run: npm install -g sonar-scanner
-
-      - name: Run SonarCloud Scan
+      - name: sonarQube
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@v3
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token stored as a GitHub secret
-        run: |
-          sonar-scanner \
-          -Dsonar.projectKey=vivek28058_Unit \
-          -Dsonar.organization=vivek28058 \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+     # - name: Install SonarCloud Scanner
+      #  run: npm install -g sonar-scanner
+
+     # - name: Run SonarCloud Scan
+      #  env:
+       #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token stored as a GitHub secret
+        #run: |
+         # sonar-scanner \
+         # -Dsonar.projectKey=vivek28058_Unit \
+         # -Dsonar.organization=vivek28058 \
+          #-Dsonar.sources=. \
+          #-Dsonar.host.url=https://sonarcloud.io \
+          #-Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
        
