@@ -17,49 +17,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Ensure correct permissions for the workspace directory
-      - name: Set permissions for workspace
-        run: |
-          sudo chmod -R 777 ${{ github.workspace }}
+      - run: sudo apt-get update && sudo apt-get install -y nginx && sudo systemctl start nginx
 
-      # Step 3: Run ZAP Scan against a known working target (https://example.com)
-      - name: Run ZAP Scan (test with example.com)
-        run: |
-          # Create a new directory for the ZAP report
-          mkdir -p /tmp/zap-reports
-
-          # Run the ZAP scan against example.com
-          echo "Running ZAP scan..."
-          docker run -t -v ${{ github.workspace }}:/zap/wrk -v /tmp/zap-reports:/zap/reports zaproxy/zap-stable zap-baseline.py -t https://example.com -r /zap/reports/zap-report.html
-
-          # Capture the exit code of the ZAP scan
-          echo "ZAP scan completed with exit code: $?"
-          
-          # Sleep to ensure the scan has enough time to finish
-          sleep 30
-
-          # Check if the report is generated
-          if [ -f /zap/reports/zap-report.html ]; then
-            echo "ZAP scan completed successfully!"
-          else
-            echo "ZAP scan failed to generate the report!"
-          fi
-
-          # Display detailed ZAP logs for debugging
-          echo "ZAP logs:"
-          cat /zap/wrk/zap.log || echo "No ZAP logs found"
-
-        continue-on-error: true
-
-      # Step 4: Verify if the report was generated
-      - name: Verify ZAP Report exists
-        run: |
-          ls -l /tmp/zap-reports/zap-report.html || echo "Report not found"
-          cat /tmp/zap-reports/zap-report.html || echo "No report generated"
-
-      # Step 5: Upload the ZAP scan report as an artifact
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v3
+      - name: ZAP Scan
+        uses: ./
+        id: action-full-scan
         with:
-          name: zap-report
-          path: /tmp/zap-reports/zap-report.html
+          target: 'http://localhost'
+          allow_issue_writing: false
