@@ -23,5 +23,5 @@ jobs:
         uses: ./
         id: action-full-scan
         with:
-          entryPoint: http://localhost
+          Target: http://localhost
         
