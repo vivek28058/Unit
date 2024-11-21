@@ -22,7 +22,7 @@ jobs:
     # Step 3: Run ZAP Scan against your application
     - name: Run ZAP Scan
       run: |
-        mkdir -p $GITHUB_WORKSPACE/reports  # Create a directory to store reports
+        mkdir -p $GITHUB_WORKSPACE/reports  # Create the reports directory
         docker run -t -w /zap/wrk -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable zap-baseline.py \
           -t https://igsglobal.com/our-solutions -r /zap/wrk/reports/zap-report.html
 
