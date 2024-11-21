@@ -15,11 +15,11 @@ jobs:
 
     # Step 2: Run the ZAP Scan
     - name: ZAP Scan
-      uses: zaproxy/action-full-scan@v0.12.0
+      uses: zaproxy/action-full-scan@v0.11.0
       with:
         target: 'https://igsglobal.com/our-solutions'
     
-    # Step 3: Upload the ZAP scan reports for analysis
+    # Step 3: Upload the ZAP report
     - name: Upload ZAP report
       uses: actions/upload-artifact@v3
       with:
