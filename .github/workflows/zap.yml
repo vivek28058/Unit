@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       issues: write
-      pull-requests: write 
+      pull-requests: write
     steps:
       # Step 1: Check out the code from the repository
       - name: Checkout Code
@@ -31,9 +31,8 @@ jobs:
       # Step 4: Verify if the report was generated
       - name: Verify ZAP Report exists
         run: |
-          echo "Listing contents of the workspace:"
-          ls -l ${{ github.workspace }}
-          cat ${{ github.workspace }}/zap-report.html || echo "Report not found!"
+          ls -l ${{ github.workspace }}/zap-report.html || echo "Report not found"
+          cat ${{ github.workspace }}/zap-report.html || echo "No report generated"
 
       # Step 5: Upload the ZAP scan report as an artifact
       - name: Upload ZAP Report
