@@ -8,6 +8,7 @@ on:
 jobs:
   owasp-zap-scan:
     runs-on: ubuntu-latest
+
     steps:
     # Step 1: Check out the code from the repository
     - name: Checkout Code
@@ -18,19 +19,16 @@ jobs:
       run: |
         sudo chmod -R 777 ${{ github.workspace }}
 
-    # Step 3: Set up OWASP ZAP using the Docker container
-    - name: Set up OWASP ZAP
-      uses: docker://zaproxy/zap-stable:latest
-
-    # Step 4: Run ZAP Scan against your application
+    # Step 3: Run ZAP Scan against your application
     - name: Run ZAP Scan
       run: |
-        docker run -t -w /zap/wrk -v /home/runner/work/Unit/Unit:/zap/wrk zaproxy/zap-stable zap-baseline.py -t https://igsglobal.com/our-solutions -r zap-report.html
-        continue-on-error: true
-        
-    # Step 5: Upload the ZAP scan report as an artifact
+        mkdir -p $GITHUB_WORKSPACE/reports  # Create a directory to store reports
+        docker run -t -w /zap/wrk -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable zap-baseline.py \
+          -t https://igsglobal.com/our-solutions -r /zap/wrk/reports/zap-report.html
+
+    # Step 4: Upload the ZAP scan report as an artifact
     - name: Upload ZAP Report
       uses: actions/upload-artifact@v3
       with:
         name: zap-report
-        path: ${{ github.workspace }}/zap-report.html
+        path: ${{ github.workspace }}/reports/zap-report.html
