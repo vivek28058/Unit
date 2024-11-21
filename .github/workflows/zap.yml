@@ -15,10 +15,13 @@ jobs:
       uses: actions/checkout@v3
 
     # Step 2: Ensure the 'reports' directory exists inside the GitHub workspace
-    - name: Create reports directory
+    - name: Create reports directory and set permissions
       run: |
         mkdir -p $GITHUB_WORKSPACE/reports
         sudo chmod -R 777 $GITHUB_WORKSPACE/reports  # Ensure the 'reports' directory is writable
+
+        # Ensure the whole /zap/wrk directory is writable by the container
+        sudo chmod -R 777 $GITHUB_WORKSPACE  # Give write permissions to the entire workspace
 
     # Step 3: Run ZAP Scan against your application
     - name: Run ZAP Scan
