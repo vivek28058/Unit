@@ -22,17 +22,18 @@ jobs:
         run: |
           sudo chmod -R 777 ${{ github.workspace }}
 
-      # Step 3: Set up OWASP ZAP using the Docker container
+      # Step 3: Run ZAP Scan against your application
       - name: Run ZAP Scan
         run: |
           docker run -t -v ${{ github.workspace }}:/zap/wrk zaproxy/zap-stable zap-baseline.py -t https://igsglobal.com/our-solutions -r /zap/wrk/zap-report.html
         continue-on-error: true
 
-      # Step 4: Verify that the report was generated
+      # Step 4: Verify if the report was generated
       - name: Verify ZAP Report exists
         run: |
-          ls -l ${{ github.workspace }}/zap-report.html
-          cat ${{ github.workspace }}/zap-report.html || echo "No report generated"
+          echo "Listing contents of the workspace:"
+          ls -l ${{ github.workspace }}
+          cat ${{ github.workspace }}/zap-report.html || echo "Report not found!"
 
       # Step 5: Upload the ZAP scan report as an artifact
       - name: Upload ZAP Report
