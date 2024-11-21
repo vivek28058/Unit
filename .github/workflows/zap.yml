@@ -20,16 +20,21 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/reports
         sudo chmod -R 777 $GITHUB_WORKSPACE/reports  # Ensure the 'reports' directory is writable
 
-        # Ensure the whole /zap/wrk directory is writable by the container
-        sudo chmod -R 777 $GITHUB_WORKSPACE  # Give write permissions to the entire workspace
+    # Step 3: Ensure the report directory is writable and confirm permissions inside the container
+    - name: Check and Set Permissions Inside Container
+      run: |
+        # Check permissions inside the container
+        docker run -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable ls -l /zap/wrk/reports
+        # Set permissions to 777 to ensure the report directory is writable
+        docker run -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable chmod -R 777 /zap/wrk/reports
 
-    # Step 3: Run ZAP Scan against your application
+    # Step 4: Run ZAP Scan and specify the correct report path
     - name: Run ZAP Scan
       run: |
         docker run -t -w /zap/wrk -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable zap-baseline.py \
           -t https://igsglobal.com/our-solutions -r /zap/wrk/reports/zap-report.html
 
-    # Step 4: Upload the ZAP scan report as an artifact
+    # Step 5: Upload the ZAP scan report as an artifact
     - name: Upload ZAP Report
       uses: actions/upload-artifact@v3
       with:
