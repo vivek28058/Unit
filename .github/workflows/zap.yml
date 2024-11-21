@@ -8,6 +8,10 @@ on:
 jobs:
   owasp-zap-scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # For write access to repository contents
+      issues: write    # If your job needs to create issues
+      pull-requests: write 
     steps:
     # Step 1: Check out the code from the repository
     - name: Checkout Code
