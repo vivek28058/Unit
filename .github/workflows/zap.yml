@@ -25,6 +25,12 @@ jobs:
         sudo mkdir -p $GITHUB_WORKSPACE/reports
         sudo chmod -R 777 $GITHUB_WORKSPACE/reports  # Ensure reports directory is writable
 
+    # Debugging: Inspect directory inside the container
+    - name: Inspect Directory in Container
+      run: |
+        docker run -v $GITHUB_WORKSPACE:/zap/wrk zaproxy/zap-stable ls -l /zap/wrk
+      # This will show the permissions inside the container
+
     # Step 4: Run ZAP Scan against your application
     - name: Run ZAP Scan
       run: |
