@@ -1,39 +1,35 @@
-name: Nikto Web Scan
-
+name: OWASP ZAP Scan
+ 
 on:
   push:
     branches:
       - main
-
+ 
 jobs:
-  nikto-scan:
+  owasp-zap-scan:
     runs-on: ubuntu-latest
-
     steps:
-    # Step 1: Checkout Code
+    # Step 1: Check out the code from the repository
     - name: Checkout Code
       uses: actions/checkout@v3
-
-    # Step 2: Install Nikto
-    - name: Install Nikto
+ 
+    # Step 2: Ensure correct permissions for the workspace directory
+    - name: Set permissions for workspace
       run: |
-        sudo apt-get update
-        sudo apt-get install -y nikto
-
-    # Step 3: Ensure the 'reports' directory exists inside the GitHub workspace
-    - name: Create reports directory and set permissions
+        sudo chmod -R 777 ${{ github.workspace }}
+ 
+    # Step 3: Set up OWASP ZAP using the Docker container
+    - name: Set up OWASP ZAP
+      uses: docker://zaproxy/zap-stable:latest
+ 
+    # Step 4: Run ZAP Scan against your application
+    - name: Run ZAP Scan
       run: |
-        mkdir -p $GITHUB_WORKSPACE/reports
-        sudo chmod -R 777 $GITHUB_WORKSPACE/reports  # Ensure the 'reports' directory is writable
-
-    # Step 4: Run Nikto Scan
-    - name: Run Nikto Scan
-      run: |
-        nikto -h https://igsglobal.com/our-solutions -o $GITHUB_WORKSPACE/reports/nikto-report.html
-
-    # Step 5: Upload the Nikto Scan Report as an artifact
-    - name: Upload Nikto Report
+        docker run -t -v ${{ github.workspace }}:/zap/wrk zaproxy/zap-stable zap-baseline.py -t https://igsglobal.com/our-solutions -r /zap/wrk/zap-report.html
+        continue-on-error: true
+    # Step 5: Upload the ZAP scan report as an artifact
+    - name: Upload ZAP Report
       uses: actions/upload-artifact@v3
       with:
-        name: nikto-report
-        path: ${{ github.workspace }}/reports/nikto-report.html
+        name: zap-report
+        path: ${{ github.workspace }}/zap-report.html
