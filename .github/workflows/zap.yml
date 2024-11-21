@@ -20,15 +20,18 @@ jobs:
         mkdir -p $GITHUB_WORKSPACE/reports
         sudo chmod -R 777 $GITHUB_WORKSPACE/reports  # Ensure the 'reports' directory is writable
 
-        # Ensure the whole workspace directory is writable
-        sudo chmod -R 777 $GITHUB_WORKSPACE  # Give write permissions to the entire workspace
+    # Step 3: Install Nikto
+    - name: Install Nikto
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nikto
 
-    # Step 3: Run Nikto Scan against your application
+    # Step 4: Run Nikto Scan against your application
     - name: Run Nikto Scan
       run: |
-        docker run --rm -v $GITHUB_WORKSPACE:/workspace -w /workspace scanningnikto/nikto -h https://igsglobal.com/our-solutions -o /workspace/reports/nikto-report.html
+        nikto -h https://igsglobal.com/our-solutions -o $GITHUB_WORKSPACE/reports/nikto-report.html
 
-    # Step 4: Upload the Nikto scan report as an artifact
+    # Step 5: Upload the Nikto scan report as an artifact
     - name: Upload Nikto Report
       uses: actions/upload-artifact@v3
       with:
