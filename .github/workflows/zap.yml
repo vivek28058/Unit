@@ -23,5 +23,5 @@ jobs:
         uses: ./
         id: action-full-scan
         with:
-          target: 'http://localhost'
-          allow_issue_writing: false
+          entryPoint: http://localhost
+        
