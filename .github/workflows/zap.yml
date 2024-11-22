@@ -1,27 +1,17 @@
 name: OWASP ZAP Scan
-
+ 
 on:
   push:
     branches:
       - main
-
+ 
 jobs:
   owasp-zap-scan:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       issues: write
-      pull-requests: write
     steps:
-      # Step 1: Check out the code from the repository
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - run: sudo apt-get update && sudo apt-get install -y nginx && sudo systemctl start nginx
-
       - name: ZAP Scan
-        uses: ./
-        id: action-full-scan
+        uses: zaproxy/action-full-scan@v0.11.0
         with:
-          Target: http://localhost
-        
+         target: 'https://igsglobal.com/'
