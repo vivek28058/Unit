@@ -1,20 +1,37 @@
-name: OWASP ZAP Scan
- 
+name: ZAP Scan Without Docker
+
 on:
   push:
     branches:
       - main
- 
+
 jobs:
-  owasp-zap-scan:
+  zap-scan:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
+
     steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.11.0
-        with:
-         target: 'http://www.itsecgames.com/'
-         cmd_options: >
-          -config "rules.ruleId=10063" 
-          -config "rules.newLevel=IGNORE"
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install ZAP
+      run: |
+        sudo apt update
+        sudo apt install -y zaproxy
+        zap.sh -version  # Verify installation
+
+    - name: Prepare Rules File
+      run: |
+        echo "10063 IGNORE" > rules.file
+        echo "40012 WARN" >> rules.file
+
+    - name: Run ZAP Full Scan
+      run: |
+        zap-full-scan.py -t http://www.itsecgames.com/ \
+          -J report_json.json -w report_md.md -r report_html.html \
+          -c rules.file
+
+    - name: Upload Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: zap-reports
+        path: '*.json, *.md, *.html'
