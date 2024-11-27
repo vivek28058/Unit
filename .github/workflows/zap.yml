@@ -27,10 +27,12 @@ jobs:
           echo "Listing contents of the repository"
           ls -R /home/runner/work/Unit/Unit/config
 
+      - name: Set correct permissions on alert-filters.json
+        run: chmod 644 config/alert-filters.json
 
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
           target: 'http://www.itsecgames.com/'
-          rules_file_name: 'alert-filters.json'
+          rules_file_name: "config/alert-filters.json"
           # Point to the alert filter file
