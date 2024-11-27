@@ -25,7 +25,7 @@ jobs:
       - name: List contents of the repository
         run: |
           echo "Listing contents of the repository"
-          ls -R /home/runner/work/Unit/Unit
+          ls -R /home/runner/work/Unit/Unit/config
 
 
       - name: ZAP Scan
