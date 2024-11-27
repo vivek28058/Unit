@@ -21,11 +21,13 @@ jobs:
 
     - name: Prepare Rules File
       run: |
-        echo "10063 IGNORE" > rules.file
+        # Create rules file in the correct location
+        echo "10063 IGNORE" > $HOME/rules.file
 
     - name: Run ZAP Full Scan
       run: |
-        zaproxy -daemon -configfile rules.file -newsession mysession \
+        # Ensure to reference the correct location of the rules file
+        zaproxy -daemon -configfile $HOME/rules.file -newsession mysession \
           -quickurl http://www.itsecgames.com/
 
     - name: Upload Reports
