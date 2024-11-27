@@ -22,6 +22,12 @@ jobs:
         run: |
           chmod 644 config/alert-filters.json
 
+      - name: List contents of the repository
+        run: |
+          echo "Listing contents of the repository"
+          ls -R /home/runner/work/Unit/Unit
+
+
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
