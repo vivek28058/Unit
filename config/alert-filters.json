@@ -1,11 +1,11 @@
 {
   "alertFilters": [
     {
-      "ruleId": 10106,  // Example rule ID for false positive
+      "pluginid": 10106,  // Example rule ID for false positive
       "newLevel": "IGNORE"
     },
     {
-      "ruleId": 40038,  // Another example rule ID
+      "pluginid": 40038,  // Another example rule ID
       "newLevel": "IGNORE"
     }
   ]
