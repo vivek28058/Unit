@@ -1,0 +1,12 @@
+{
+  "alertFilters": [
+    {
+      "ruleId": 10063,  // Example rule ID for false positive
+      "newLevel": "IGNORE"
+    },
+    {
+      "ruleId": 10071,  // Another example rule ID
+      "newLevel": "IGNORE"
+    }
+  ]
+}
