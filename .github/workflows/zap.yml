@@ -17,5 +17,5 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
-          target: 'https://www.vulnhub.com/entry/damn-vulnerable-web-application-dvwa-107,43/'
+          target: 'http://www.itsecgames.com/'
           rules_file_name: 'alert-filters.json'  # Point to the alert filter file
