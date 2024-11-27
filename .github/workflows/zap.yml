@@ -24,14 +24,17 @@ jobs:
         # Create rules file in the correct location
         echo "10063 IGNORE" > $HOME/rules.file
 
-    - name: Run ZAP Full Scan
+    - name: Run ZAP Full Scan (Non-Daemon Mode for Debugging)
       run: |
-        # Ensure to reference the correct location of the rules file
-        zaproxy -daemon -configfile $HOME/rules.file -newsession mysession \
-          -quickurl http://www.itsecgames.com/
+        # Run ZAP in non-daemon mode to see the results in the log
+        zaproxy -configfile $HOME/rules.file -newsession mysession \
+          -quickurl http://www.itsecgames.com/ -w zap_report.md -r zap_report.html -J zap_report.json
 
     - name: Upload Reports
       uses: actions/upload-artifact@v3
       with:
         name: zap-reports
         path: '*.json, *.md, *.html'
+
+    - name: Show ZAP Logs
+      run: cat zap_report.md  # Show the generated report for debugging
