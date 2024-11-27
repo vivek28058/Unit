@@ -16,5 +16,5 @@ jobs:
         with:
          target: 'http://www.itsecgames.com/'
          cmd_options: >
-          -config rules.ruleId=10063 
-          -config rules.newLevel=IGNORE
+          -config "rules.ruleId=10063" 
+          -config "rules.newLevel=IGNORE"
