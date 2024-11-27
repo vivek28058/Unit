@@ -1,40 +1,21 @@
 name: OWASP ZAP Scan
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  zap-scan:
+  owasp-zap-scan:
     runs-on: ubuntu-latest
-
+    permissions:
+      issues: write
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Install ZAP via Snap
-      run: |
-        sudo apt update
-        sudo apt install -y snapd
-        sudo snap install zaproxy --classic
-        zaproxy -version  # Verify installation
-
-    - name: Prepare Rules File
-      run: |
-        # Create rules file in the correct location
-        echo "10063 IGNORE" > $HOME/rules.file
-
-    - name: Run ZAP Full Scan (Daemon Mode)
-      run: |
-        # Run ZAP in daemon mode (no GUI)
-        zaproxy -daemon -configfile $HOME/rules.file -newsession mysession \
-          -quickurl http://www.itsecgames.com/ -w zap_report.md -r zap_report.html -J zap_report.json
-
-    - name: Upload Reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: zap-reports
-        path: '*.json, *.md, *.html'
-
-    - name: Show ZAP Logs
-      run: cat zap_report.md  # Show the generated report for debugging
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.11.0
+        with:
+          target: 'https://www.vulnhub.com/entry/damn-vulnerable-web-application-dvwa-107,43/'
+          rules_file_name: 'alert-filters.json'  # Point to the alert filter file
