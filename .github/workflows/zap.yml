@@ -36,9 +36,6 @@ jobs:
     - name: Move ZAP HTML Report
       run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
 
-    - name: Set up Git for Commit
-      uses: actions/setup-git@v2
-
     - name: Commit and Push ZAP Report to Repository
       run: |
        git config --local user.name "vivek28058"
