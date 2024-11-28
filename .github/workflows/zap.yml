@@ -19,10 +19,11 @@ jobs:
       - name: Verify Rules File
         run: ls -l .github/workflows/
 
+      # Step 3: Debug Rules File
       - name: Debug Rules File
         run: cat .github/workflows/rules.zap
 
-      # Step 3: Run OWASP ZAP Full Scan
+      # Step 4: Run OWASP ZAP Full Scan
       - name: Run OWASP ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.12.0
         with:
@@ -30,50 +31,54 @@ jobs:
           rules_file_name: '.github/workflows/rules.zap'
           artifact_name: zap_scan  # Ensure this matches the download step
 
-      # Step 4: List available artifacts (for debugging)
-      - name: List Artifacts
-        run: |
-          curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" | jq '.artifacts[] | .name'
-
-      # Step 5: Download Artifact (zap_scan)
+      # Step 5: Download ZAP Scan Artifact (zap_scan.zip)
       - name: Download ZAP Scan Artifact
         uses: actions/download-artifact@v3
         with:
-          name: zap_scan  # Should match the artifact name in the previous step
+          name: zap_scan  # Ensure this matches the artifact name in the previous step
           path: zap_scan/
 
-      # Step 6: Install zap-cli for report generation
-      - name: Install zap-cli
+      # Step 6: List downloaded files (for debugging)
+      - name: List downloaded files
         run: |
-          pip install zap-cli
+          echo "Listing all files in zap_scan directory:"
+          find zap_scan/
 
-      # Step 7: Filter and Generate Updated Report
-      - name: Filter ZAP Scan Report
+      # Step 7: Unzip the downloaded artifact (if it's a ZIP file)
+      - name: Unzip ZAP Scan Report
+        run: |
+          unzip zap_scan/zap_scan.zip -d zap_scan/
+
+      # Step 8: Parse ZAP Results (filter the JSON report)
+      - name: Parse ZAP Results
         run: |
           REPORT_FILE="zap_scan/report_json.json"
-          FILTERED_REPORT="zap_scan/filtered_report.json"
           if [ -f "$REPORT_FILE" ]; then
-            # Filter out ignored alerts
-            jq 'del(.site[].alerts[] | select(.risk == "Low" and .confidence == "Low"))' "$REPORT_FILE" > "$FILTERED_REPORT"
-            # Overwrite original report
-            mv "$FILTERED_REPORT" "$REPORT_FILE"
+            # Count FAIL-NEW and WARN-NEW
+            WARN_NEW=$(jq '[.site[].alerts[] | select(.risk == "Medium" or .risk == "High")] | length' "$REPORT_FILE")
+            FAIL_NEW=$(jq '[.site[].alerts[] | select(.risk == "High")] | length' "$REPORT_FILE")
+            echo "WARN_NEW=$WARN_NEW" >> $GITHUB_ENV
+            echo "FAIL_NEW=$FAIL_NEW" >> $GITHUB_ENV
           else
-            echo "Original report file not found!"
+            echo "Report file not found!"
             exit 1
           fi
 
-      # Step 8: Generate HTML Report
-      - name: Generate Filtered HTML Report
+      # Step 9: Check Thresholds and set status based on findings
+      - name: Check Thresholds
         run: |
-          zap-cli report \
-            -o zap_scan/filtered_report.html \
-            -f html \
-            -i zap_scan/report_json.json
+          if [ "$FAIL_NEW" -gt 0 ]; then
+            echo "Scan failed due to high-risk vulnerabilities!"
+            exit 1
+          elif [ "$WARN_NEW" -gt 5 ]; then
+            echo "Warning: $WARN_NEW medium-risk vulnerabilities detected!"
+          else
+            echo "Scan passed without critical issues."
+          fi
 
-      # Step 9: Upload Updated Reports
-      - name: Upload Filtered Reports
+      # Step 10: Upload filtered report artifact (if needed)
+      - name: Upload Filtered ZAP Report
         uses: actions/upload-artifact@v3
         with:
-          name: zap_filtered_report
-          path: zap_scan/
+          name: filtered_zap_report
+          path: zap_scan/filtered_report.html  # Path to your filtered report (HTML)
