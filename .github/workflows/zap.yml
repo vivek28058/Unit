@@ -27,6 +27,17 @@ jobs:
           rules_file_name: '.github/workflows/rules.zap'
           artifact_name: zap_scan
 
+      - name: Debug ZAP Output
+        run: |
+          echo "Listing contents of zap_scan directory:"
+          ls -l zap_scan/
+
+      - name: Debug Root Directory
+        run: |
+          echo "Listing all files in the root directory:"
+          find . -type f
+
+
       - name: Parse ZAP Results
         id: parse-results
         run: |
