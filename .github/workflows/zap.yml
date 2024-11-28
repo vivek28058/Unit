@@ -32,6 +32,15 @@ jobs:
           echo "Listing all files in the root directory:"
           find . -type f
 
+      - name: Download ZAP Scan Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: zap_scan
+          path: ./zap_scan
+
+      - name: Extract ZAP Scan Artifact
+        run: |
+          unzip zap_scan.zip -d zap_scan
 
       - name: Parse ZAP Results
         id: parse-results
@@ -41,7 +50,6 @@ jobs:
             # Count FAIL-NEW and WARN-NEW
             WARN_NEW=$(jq '[.site[].alerts[] | select(.risk == "Medium" or .risk == "High")] | length' "$REPORT_FILE")
             FAIL_NEW=$(jq '[.site[].alerts[] | select(.risk == "High")] | length' "$REPORT_FILE")
-
             echo "WARN_NEW=$WARN_NEW" >> $GITHUB_ENV
             echo "FAIL_NEW=$FAIL_NEW" >> $GITHUB_ENV
           else
