@@ -1,4 +1,4 @@
-name: OWASP ZAP Scan
+name: ZAP Scan and Save Report
 
 on:
   push:
@@ -6,24 +6,45 @@ on:
       - main
 
 jobs:
-  zap_scan:
+  zap-scan:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
-      - name: Run OWASP ZAP Full Scan
-        uses: zaproxy/action-full-scan@v0.12.0
-        with:
-          target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
-          rules_file_name: '.github/workflows/rules.zap'
-          artifact_name: zap_scan  # Ensure this matches the download step
-          cmd_options: '-l WARN'
+    - name: Run OWASP ZAP Full Scan
+      uses: zaproxy/action-full-scan@v0.12.0
+      with:
+        target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
+        rules_file_name: '.github/workflows/rules.zap'
+        artifact_name: zap_scan
+        cmd_options: '-l WARN -r zap_scan_report.html'
 
-      - name: Upload Report Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: zap_scan_filtered
-          path: zap_scan/*.html
+    - name: Download ZAP Scan Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: zap_scan
+        path: ./zap_scan_artifact
+
+    - name: Unzip ZAP Scan Artifact
+      run: unzip ./zap_scan_artifact/zap_scan.zip -d ./zap_scan_artifact/
+
+    - name: Create Reports Folder
+      run: mkdir -p reports/zap_scan
+
+    - name: Move ZAP HTML Report
+      run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
+
+    - name: Set up Git for Commit
+      uses: actions/setup-git@v2
+
+    - name: Commit and Push ZAP Report to Repository
+      run: |
+        git config --local user.name "vivek28058"
+        git config --local user.email "vivek@igsindia.net"
+        git add reports/zap_scan/report_html.html
+        git commit -m "Add ZAP Scan HTML Report"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
