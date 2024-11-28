@@ -19,7 +19,7 @@ jobs:
         target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
         rules_file_name: '.github/workflows/rules.zap'
         artifact_name: zap_scan
-        cmd_options: '-l WARN -r zap_scan_report.html'
+        cmd_options: '-l WARN'
 
     - name: Wait for artifact to be available
       run: sleep 10  # Optional: Adds a 10-second delay to ensure artifact availability
@@ -50,12 +50,12 @@ jobs:
       run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
 
     - name: Set up Git for Commit
-      uses: actions/configure-git@v2  # Replaced with the correct action for configuring Git
+      run: |
+        git config --global user.name "vivek28058"
+        git config --global user.email "vivek@igsindia.net"
 
     - name: Commit and Push ZAP Report to Repository
       run: |
-       git config --local user.name "vivek28058"
-       git config --local user.email "vivek@igsindia.net"
        git add reports/zap_scan/report_html.html
        git commit -m "Add ZAP Scan HTML Report"
        git push origin main  # Replace 'main' with the appropriate branch name if necessary
