@@ -21,6 +21,9 @@ jobs:
         artifact_name: zap_scan
         cmd_options: '-l WARN'
 
+    - name: Wait for artifact to be available
+      run: sleep 20 
+
     - name: Download ZAP Scan Artifact
       uses: actions/download-artifact@v3
       with:
