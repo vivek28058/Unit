@@ -17,46 +17,5 @@ jobs:
       uses: zaproxy/action-full-scan@v0.12.0
       with:
         target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
-        rules_file_name: '.github/workflows/rules.zap'
-        artifact_name: zap_scan
-        cmd_options: '-l WARN'
+        rules_file_name: '.github/workflows/rules.tsv'
 
-    - name: Wait for artifact to be available
-      run: sleep 10  # Optional: Adds a 10-second delay to ensure artifact availability
-
-    - name: List Artifacts Directory (Debug)
-      run: |
-        echo "Listing downloaded artifact directory:"
-        ls -R ./zap_scan_artifact
-
-
-    - name: Download ZAP Scan Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: zap_scan  # Ensure this matches the artifact name used during upload
-        path: ./zap_scan_artifact
-
-    - name: List artifacts
-      run: |
-        echo "Listing artifacts:"
-        ls -R ./zap_scan_artifact  # Lists the contents of the downloaded artifact directory
-
-    - name: Unzip ZAP Scan Artifact
-      run: unzip ./zap_scan_artifact/zap_scan.zip -d ./zap_scan_artifact/
-
-    - name: Create Reports Folder
-      run: mkdir -p reports/zap_scan
-
-    - name: Move ZAP HTML Report
-      run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
-
-    - name: Set up Git for Commit
-      run: |
-        git config --global user.name "vivek28058"
-        git config --global user.email "vivek@igsindia.net"
-
-    - name: Commit and Push ZAP Report to Repository
-      run: |
-       git add reports/zap_scan/report_html.html
-       git commit -m "Add ZAP Scan HTML Report"
-       git push origin main  # Replace 'main' with the appropriate branch name if necessary
