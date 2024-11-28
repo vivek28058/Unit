@@ -25,11 +25,37 @@ jobs:
         with:
           target: 'http://www.itsecgames.com/'
           rules_file_name: '.github/workflows/rules.zap'
+          artifact_name: zap_scan
 
-      - name: Install zap-cli
+      - name: Parse ZAP Results
+        id: parse-results
         run: |
-         pip install zap-cli
+          REPORT_FILE="zap_scan/report_json.json"
+          if [ -f "$REPORT_FILE" ]; then
+            # Count FAIL-NEW and WARN-NEW
+            WARN_NEW=$(jq '[.site[].alerts[] | select(.risk == "Medium" or .risk == "High")] | length' "$REPORT_FILE")
+            FAIL_NEW=$(jq '[.site[].alerts[] | select(.risk == "High")] | length' "$REPORT_FILE")
 
-      - name: Generate Reports
+            echo "WARN_NEW=$WARN_NEW" >> $GITHUB_ENV
+            echo "FAIL_NEW=$FAIL_NEW" >> $GITHUB_ENV
+          else
+            echo "Report file not found!"
+            exit 1
+          fi
+
+      - name: Check Thresholds
         run: |
-         zap-cli report -o html -p /zap/wrk/reports/ -i /zap/wrk/scans/latest/scan_results.json --ignore "ignore"
+          if [ "$FAIL_NEW" -gt 0 ]; then
+            echo "Scan failed due to high-risk vulnerabilities!"
+            exit 1
+          elif [ "$WARN_NEW" -gt 5 ]; then
+            echo "Warning: $WARN_NEW medium-risk vulnerabilities detected!"
+          else
+            echo "Scan passed without critical issues."
+          fi
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap_report
+          path: zap_scan/
