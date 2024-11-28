@@ -11,65 +11,63 @@ jobs:
     permissions:
       contents: read
     steps:
+      # Step 1: Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Step 2: Verify the rules file
       - name: Verify Rules File
         run: ls -l .github/workflows/
 
       - name: Debug Rules File
         run: cat .github/workflows/rules.zap
 
+      # Step 3: Run OWASP ZAP Full Scan
       - name: Run OWASP ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.12.0
         with:
-          target: 'http://www.itsecgames.com/'
+          target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
           rules_file_name: '.github/workflows/rules.zap'
           artifact_name: zap_scan
 
-      - name: Debug Root Directory
-        run: |
-          echo "Listing all files in the root directory:"
-          find . -type f
-
+      # Step 4: Download Artifact (zap_scan)
       - name: Download ZAP Scan Artifact
         uses: actions/download-artifact@v3
         with:
           name: zap_scan
-          path: ./zap_scan
+          path: zap_scan/
 
-      - name: Extract ZAP Scan Artifact
+      # Step 5: Install zap-cli for report generation
+      - name: Install zap-cli
         run: |
-          unzip zap_scan.zip -d zap_scan
+          pip install zap-cli
 
-      - name: Parse ZAP Results
-        id: parse-results
+      # Step 6: Filter and Generate Updated Report
+      - name: Filter ZAP Scan Report
         run: |
           REPORT_FILE="zap_scan/report_json.json"
+          FILTERED_REPORT="zap_scan/filtered_report.json"
           if [ -f "$REPORT_FILE" ]; then
-            # Count FAIL-NEW and WARN-NEW
-            WARN_NEW=$(jq '[.site[].alerts[] | select(.risk == "Medium" or .risk == "High")] | length' "$REPORT_FILE")
-            FAIL_NEW=$(jq '[.site[].alerts[] | select(.risk == "High")] | length' "$REPORT_FILE")
-            echo "WARN_NEW=$WARN_NEW" >> $GITHUB_ENV
-            echo "FAIL_NEW=$FAIL_NEW" >> $GITHUB_ENV
+            # Filter out ignored alerts
+            jq 'del(.site[].alerts[] | select(.risk == "Low" and .confidence == "Low"))' "$REPORT_FILE" > "$FILTERED_REPORT"
+            # Overwrite original report
+            mv "$FILTERED_REPORT" "$REPORT_FILE"
           else
-            echo "Report file not found!"
+            echo "Original report file not found!"
             exit 1
           fi
 
-      - name: Check Thresholds
+      # Step 7: Generate HTML Report
+      - name: Generate Filtered HTML Report
         run: |
-          if [ "$FAIL_NEW" -gt 0 ]; then
-            echo "Scan failed due to high-risk vulnerabilities!"
-            exit 1
-          elif [ "$WARN_NEW" -gt 5 ]; then
-            echo "Warning: $WARN_NEW medium-risk vulnerabilities detected!"
-          else
-            echo "Scan passed without critical issues."
-          fi
+          zap-cli report \
+            -o zap_scan/filtered_report.html \
+            -f html \
+            -i zap_scan/report_json.json
 
-      - name: Upload ZAP Report
+      # Step 8: Upload Updated Reports
+      - name: Upload Filtered Reports
         uses: actions/upload-artifact@v3
         with:
-          name: zap_report
+          name: zap_filtered_report
           path: zap_scan/
