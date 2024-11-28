@@ -22,13 +22,23 @@ jobs:
         cmd_options: '-l WARN'
 
     - name: Wait for artifact to be available
-      run: sleep 20 
+      run: sleep 10  # Optional: Adds a 10-second delay to ensure artifact availability
+
+    - name: List uploaded artifacts (debug)
+      run: |
+        echo "Listing artifact directory:"
+        ls -R /tmp  # This will list contents of the temporary storage area used for the artifact upload
 
     - name: Download ZAP Scan Artifact
       uses: actions/download-artifact@v3
       with:
-        name: zap_scan
+        name: zap_scan  # Ensure this matches the artifact name used during upload
         path: ./zap_scan_artifact
+
+    - name: List artifacts
+      run: |
+        echo "Listing artifacts:"
+        ls -R ./zap_scan_artifact  # Lists the contents of the downloaded artifact directory
 
     - name: Unzip ZAP Scan Artifact
       run: unzip ./zap_scan_artifact/zap_scan.zip -d ./zap_scan_artifact/
@@ -38,6 +48,9 @@ jobs:
 
     - name: Move ZAP HTML Report
       run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
+
+    - name: Set up Git for Commit
+      uses: actions/setup-git@v2
 
     - name: Commit and Push ZAP Report to Repository
       run: |
