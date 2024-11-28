@@ -41,10 +41,8 @@ jobs:
 
     - name: Commit and Push ZAP Report to Repository
       run: |
-        git config --local user.name "vivek28058"
-        git config --local user.email "vivek@igsindia.net"
-        git add reports/zap_scan/report_html.html
-        git commit -m "Add ZAP Scan HTML Report"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       git config --local user.name "vivek28058"
+       git config --local user.email "vivek@igsindia.net"
+       git add reports/zap_scan/report_html.html
+       git commit -m "Add ZAP Scan HTML Report"
+       git push origin main  # Replace 'main' with the appropriate branch name if necessary
