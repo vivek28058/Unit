@@ -28,21 +28,27 @@ jobs:
         with:
           target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
           rules_file_name: '.github/workflows/rules.zap'
-          artifact_name: zap_scan
+          artifact_name: zap_scan  # Ensure this matches the download step
 
-      # Step 4: Download Artifact (zap_scan)
+      # Step 4: List available artifacts (for debugging)
+      - name: List Artifacts
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" | jq '.artifacts[] | .name'
+
+      # Step 5: Download Artifact (zap_scan)
       - name: Download ZAP Scan Artifact
         uses: actions/download-artifact@v3
         with:
-          name: zap_scan
+          name: zap_scan  # Should match the artifact name in the previous step
           path: zap_scan/
 
-      # Step 5: Install zap-cli for report generation
+      # Step 6: Install zap-cli for report generation
       - name: Install zap-cli
         run: |
           pip install zap-cli
 
-      # Step 6: Filter and Generate Updated Report
+      # Step 7: Filter and Generate Updated Report
       - name: Filter ZAP Scan Report
         run: |
           REPORT_FILE="zap_scan/report_json.json"
@@ -57,7 +63,7 @@ jobs:
             exit 1
           fi
 
-      # Step 7: Generate HTML Report
+      # Step 8: Generate HTML Report
       - name: Generate Filtered HTML Report
         run: |
           zap-cli report \
@@ -65,7 +71,7 @@ jobs:
             -f html \
             -i zap_scan/report_json.json
 
-      # Step 8: Upload Updated Reports
+      # Step 9: Upload Updated Reports
       - name: Upload Filtered Reports
         uses: actions/upload-artifact@v3
         with:
