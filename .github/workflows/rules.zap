@@ -1,2 +1,3 @@
-10035    IGNORE    (Strict-Transport-Security Header Not Set)
-10035    IGNORE    (Strict-Transport-Security Header Not Set)
+10035	IGNORE	LOW
+40012	FAIL	MEDIUM
+90022	WARN	LOW
