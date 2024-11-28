@@ -19,7 +19,7 @@ jobs:
         target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
         rules_file_name: '.github/workflows/rules.zap'
         artifact_name: zap_scan
-        cmd_options: '-l WARN'
+        cmd_options: '-l WARN -r zap_scan_report.html'
 
     - name: Wait for artifact to be available
       run: sleep 10  # Optional: Adds a 10-second delay to ensure artifact availability
@@ -50,7 +50,7 @@ jobs:
       run: mv ./zap_scan_artifact/report_html.html reports/zap_scan/
 
     - name: Set up Git for Commit
-      uses: actions/setup-git@v2
+      uses: actions/configure-git@v2  # Replaced with the correct action for configuring Git
 
     - name: Commit and Push ZAP Report to Repository
       run: |
