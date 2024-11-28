@@ -20,7 +20,7 @@ jobs:
           target: 'https://mlshoppreprod.mlhuillier.com/jewelryback/Account/OrderDetails?OrderNumber=MLMDKEXTVBL&OrderId=O20241007135949882172'
           rules_file_name: '.github/workflows/rules.zap'
           artifact_name: zap_scan  # Ensure this matches the download step
-          cmd_options: '-alertthreshold Medium'
+          cmd_options: '-alertthreshold WARN'
 
       - name: Upload Report Artifact
         uses: actions/upload-artifact@v3
