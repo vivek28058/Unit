@@ -24,10 +24,11 @@ jobs:
     - name: Wait for artifact to be available
       run: sleep 10  # Optional: Adds a 10-second delay to ensure artifact availability
 
-    - name: List uploaded artifacts (debug)
+    - name: List Artifacts Directory (Debug)
       run: |
-        echo "Listing artifact directory:"
-        ls -R /tmp  # This will list contents of the temporary storage area used for the artifact upload
+        echo "Listing downloaded artifact directory:"
+        ls -R ./zap_scan_artifact
+
 
     - name: Download ZAP Scan Artifact
       uses: actions/download-artifact@v3
