@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: ZAP Dynamic Analysis Scan
-      uses: zaproxy/action-full-scan@v0.11.0
+      uses: zaproxy/action-full-scan@v0.12.0
       with:
         target: 'https://bwapp.hakhub.net/'
         cmd_options: >
@@ -27,6 +27,5 @@ jobs:
           -config users.1.credentials.password=vivek
           -config api.addrs.addr.name=.* 
           -config api.addrs.addr.regex=true
-   # rules_file_name: '.github/workflows/rules.zap'
 
 
