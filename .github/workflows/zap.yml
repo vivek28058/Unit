@@ -13,16 +13,20 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Debug Files in Docker
-      run: ls -la .github/workflows/
-
     - name: ZAP Dynamic Analysis Scan
-      uses: zaproxy/action-full-scan@v0.11.0
+      uses: zaproxy/action-full-scan@v0.12.0
       with:
-          target: 'https://bwapp.hakhub.net/'
-          #rules_file_name: '.github/workflows/rules.zap'
-          cmd_options: >
-            -configfile /zap/wrk/.github/workflows/bwapp.context
-            -config api.addrs.addr.name=.* 
-            -config api.addrs.addr.regex=true
+        target: 'https://bwapp.hakhub.net/'
+        rules_file_name: '.github/workflows/rules.zap'
+        cmd_options: >
+          -config authentication.method=formBasedAuthentication
+          -config authentication.formBasedAuthentication.loginUrl=https://bwapp.hakhub.net/login.php
+          -config authentication.formBasedAuthentication.loginRequestData="login=vivek&password=vivek&form=submit"
+          -config sessionManagement.method=cookieBasedSessionManagement
+          -config users.1.name=vivek
+          -config users.1.credentials.username=vivek
+          -config users.1.credentials.password=vivek
+          -config api.addrs.addr.name=.* 
+          -config api.addrs.addr.regex=true
+
 
