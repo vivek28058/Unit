@@ -13,21 +13,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Java and OWASP Dependency-Check
-      run: |
-        sudo apt update
-        sudo apt install -y openjdk-11-jdk
-        curl -LO https://github.com/jeremylong/DependencyCheck/releases/download/v6.3.2/dependency-check-6.3.2-release.zip
-        unzip dependency-check-6.3.2-release.zip
-        sudo mv dependency-check-6.3.2 /opt/dependency-check
-        export PATH=$PATH:/opt/dependency-check/bin
-
-    - name: Run Dependency-Check
-      run: |
-        dependency-check --scan ./your_app.apk --out ./dependency-check-report
-
-    - name: Upload Dependency-Check Report
-      uses: actions/upload-artifact@v3
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        name: dependency-check-report
-        path: ./dependency-check-report
+        python-version: '3.x'
+
+    - name: Install VirusTotal API client
+      run: |
+        pip install requests
+
+    - name: Scan APK with VirusTotal
+      run: |
+        import requests
+        import os
+        file_path = 'sample.apk'
+        url = 'https://www.virustotal.com/api/v3/files'
+        headers = {'x-apikey': '${{ secrets.VIRUSTOTAL_API_KEY }}'}
+        files = {'file': open(file_path, 'rb')}
+        response = requests.post(url, headers=headers, files=files)
+        print(response.json())
