@@ -25,3 +25,5 @@ jobs:
     - name: Run MobSF scan
       run: |
         docker run --rm -v $(pwd):/src mobsf:latest scan /src/your_app.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
