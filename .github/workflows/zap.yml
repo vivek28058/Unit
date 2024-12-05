@@ -18,5 +18,5 @@ jobs:
 
     - name: Run MobSF scan
       run: |
-        docker pull opensecurity/mobsf
-        docker run --rm -v $(pwd):/src opensecurity/mobsf scan sample.apk
+        docker pull mobsf/mobsf:latest
+        docker run --rm -v $(pwd):/src mobsf/mobsf:latest scan /src/your_app.apk
