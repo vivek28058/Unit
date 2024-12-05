@@ -24,4 +24,4 @@ jobs:
 
     - name: Run MobSF scan
       run: |
-        docker run --rm -v $(pwd):/src mobsf:latest scan sample.apk
+        docker run --rm -v $(pwd):/src mobsf:latest scan /src/your_app.apk
