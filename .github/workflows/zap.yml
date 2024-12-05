@@ -1,4 +1,4 @@
-name: ZAP Scan and Save Report
+name: APK Security Scan
 
 on:
   push:
@@ -6,17 +6,17 @@ on:
       - main
 
 jobs:
-  zap-scan:
+  scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: ZAP Dynamic Analysis Scan
-      uses: zaproxy/action-full-scan@v0.12.0
-      with:
-        target: 'https://bwapp.hakhub.net/'
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
 
-
-
+    - name: Run MobSF scan
+      run: |
+        docker pull opensecurity/mobsf
+        docker run --rm -v $(pwd):/src opensecurity/mobsf scan sample.apk
