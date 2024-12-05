@@ -13,21 +13,21 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install Androguard
+    - name: Install Java and OWASP Dependency-Check
       run: |
-        pip install androguard
+        sudo apt update
+        sudo apt install -y openjdk-11-jdk
+        curl -LO https://github.com/jeremylong/DependencyCheck/releases/download/v6.3.2/dependency-check-6.3.2-release.zip
+        unzip dependency-check-6.3.2-release.zip
+        sudo mv dependency-check-6.3.2 /opt/dependency-check
+        export PATH=$PATH:/opt/dependency-check/bin
 
-    - name: Scan APK with Androguard
+    - name: Run Dependency-Check
       run: |
-        androguard -i sample.apk -o scan_report.json
-    
-    - name: Upload Androguard Report
-      uses: actions/upload-artifact@v2
+        dependency-check --scan ./your_app.apk --out ./dependency-check-report
+
+    - name: Upload Dependency-Check Report
+      uses: actions/upload-artifact@v3
       with:
-        name: androguard-report
-        path: scan_report.json
+        name: dependency-check-report
+        path: ./dependency-check-report
