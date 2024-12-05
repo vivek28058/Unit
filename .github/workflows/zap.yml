@@ -16,6 +16,9 @@ jobs:
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
 
+    - name: Set up authentication for GitHub
+      run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com".insteadOf "https://github.com"
+
     - name: Clone MobSF repository
       run: |
         git clone https://github.com/MobSF/Mobile-Security-Framework.git
@@ -25,5 +28,3 @@ jobs:
     - name: Run MobSF scan
       run: |
         docker run --rm -v $(pwd):/src mobsf:latest scan /src/your_app.apk
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
