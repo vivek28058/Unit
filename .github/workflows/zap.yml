@@ -1,34 +1,49 @@
-name: APK Security Scan
+name: MobSF APK Scan
 
 on:
   push:
     branches:
       - main
-
 jobs:
-  scan:
+  mobsf-scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-    - name: Install VirusTotal API client
-      run: |
-        pip install requests
+      - name: Install MobSF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git unzip
+          pip install -r https://raw.githubusercontent.com/MobSF/Mobile-Security-Framework/master/requirements.txt
 
-    - name: Scan APK with VirusTotal
-      run: |
-        import requests
-        import os
-        file_path = 'sample.apk'
-        url = 'https://www.virustotal.com/api/v3/files'
-        headers = {'x-apikey': '${{ secrets.VIRUSTOTAL_API_KEY }}'}
-        files = {'file': open(file_path, 'rb')}
-        response = requests.post(url, headers=headers, files=files)
-        print(response.json())
+      - name: Clone MobSF repository
+        run: |
+          git clone https://github.com/MobSF/Mobile-Security-Framework.git
+          cd Mobile-Security-Framework
+          git checkout latest
+
+      - name: Start MobSF server
+        run: |
+          cd Mobile-Security-Framework
+          nohup python3 manage.py runserver 0.0.0.0:8000 &
+
+      - name: Upload APK to MobSF for scanning
+        run: |
+          curl -X POST "http://localhost:8000/api/v1/upload" -F "file=sample.apk"
+
+      - name: Check Scan Status
+        run: |
+          curl -X GET "http://localhost:8000/api/v1/result/{scan_id}"
+
+      - name: Upload Scan Results as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobsf-scan-results
+          path: ./Mobile-Security-Framework/reports/
