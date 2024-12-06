@@ -18,6 +18,23 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Install MobSF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git unzip
+
+      - name: Set up MobSF repository (if applicable)
+        run: |
+          git clone https://github.com/MobSF/Mobile-Security-Framework.git
+          cd Mobile-Security-Framework
+          git checkout latest
+
+      - name: Start MobSF server
+        run: |
+          cd Mobile-Security-Framework
+          nohup python3 manage.py runserver 0.0.0.0:8000 &
+          sleep 10  # Wait for the server to start
+
       - name: Run MobSF Scan
         uses: MobSF/mobsfscan@main
         with:
