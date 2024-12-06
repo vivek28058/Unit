@@ -13,16 +13,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Install AppSweep CLI
-        run: |
-          curl -sL https://appsweep.io/cli/install | bash
-        shell: bash
-
-      - name: Run AppSweep Scan
-        run: |
-          appsweep scan --project BitbarSampleApp --api-key ${{ secrets.APPSWEEP_API_KEY }}
-        env:
-          APPSWEEP_API_KEY: ${{ secrets.APPSWEEP_API_KEY }}
+      - uses: guardsquare/appsweep-action@main
+        with:
+          appsweep_api_key: ${{ secrets.APPSWEEP_API_KEY }}
+          input_file: sample.apk
 
       - name: Upload AppSweep Report
         uses: actions/upload-artifact@v3
