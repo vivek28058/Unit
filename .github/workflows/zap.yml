@@ -1,53 +1,63 @@
-name: APK Security Scan with MobSF
+name: MobSF APK Scan
 
 on:
   push:
     branches:
       - main
+    paths:
+      - '**/*.apk'
 
 jobs:
-  security-scan:
+  mobsf-scan:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker
-        run: |
-          # Remove conflicting containerd package if exists
-          sudo apt-get remove --purge containerd
-          sudo apt-get autoremove --purge
-          sudo apt-mark unhold containerd
-
-          # Ensure no leftover issues from previous installations
-          sudo dpkg --purge containerd || true
-          
-          # Clean up package cache and update package lists
-          sudo apt-get clean
-          sudo apt-get update
-
-          # Install Docker dependencies
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
-
-      - name: Pull MobSF Docker image
-        run: |
-          docker pull opensecurity/mobile-security-framework-mobsf:latest
-
-      - name: Download APK from repository
-        uses: actions/download-artifact@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          name: sample
-          path: ./apk
+          python-version: '3.8'
 
-      - name: Run MobSF scan on APK
+      - name: Install MobSF dependencies
         run: |
-          docker run --rm -v $(pwd)/apk:/apk opensecurity/mobile-security-framework-mobsf:latest -a /apk/sample.apk
+          sudo apt-get update
+          sudo apt-get install -y git unzip
 
-      - name: Upload MobSF Report
+      - name: Set up SSH key for cloning
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone MobSF repository
+        run: |
+          git clone git@github.com:MobSF/Mobile-Security-Framework.git
+          cd Mobile-Security-Framework
+          git checkout latest
+
+      - name: Install dependencies from MobSF repository
+        run: |
+          cd Mobile-Security-Framework
+          pip install -r requirements.txt
+
+      - name: Start MobSF server
+        run: |
+          cd Mobile-Security-Framework
+          nohup python3 manage.py runserver 0.0.0.0:8000 &
+
+      - name: Upload APK to MobSF for scanning
+        run: |
+          curl -X POST "http://localhost:8000/api/v1/upload" -F "file=@path_to_your_apk_file.apk"
+
+      - name: Check Scan Status
+        run: |
+          curl -X GET "http://localhost:8000/api/v1/result/{scan_id}"
+
+      - name: Upload Scan Results as Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mobsf-report
-          path: ./mobsf-report
+          name: mobsf-scan-results
+          path: ./Mobile-Security-Framework/reports/
