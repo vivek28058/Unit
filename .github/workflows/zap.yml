@@ -18,9 +18,16 @@ jobs:
           # Remove conflicting containerd package if exists
           sudo apt-get remove --purge containerd
           sudo apt-get autoremove --purge
+          sudo apt-mark unhold containerd
+
+          # Ensure no leftover issues from previous installations
+          sudo dpkg --purge containerd || true
+          
+          # Clean up package cache and update package lists
+          sudo apt-get clean
+          sudo apt-get update
 
           # Install Docker dependencies
-          sudo apt-get update
           sudo apt-get install -y docker.io
           sudo systemctl start docker
           sudo systemctl enable docker
