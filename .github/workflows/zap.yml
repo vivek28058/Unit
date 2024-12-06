@@ -18,14 +18,4 @@ jobs:
         uses: guardsquare/appsweep-action@main
         with:
           appsweep_api_key: ${{ secrets.APPSWEEP_API_KEY }}
-          input_file: sample.apk
-
-      - name: Get AppSweep Report URL
-        run: |
-          echo "AppSweep Report URL: ${{ steps.appsweep-scan.outputs.build_url }}"  # Get the URL of the scan result
-          
-      - name: Upload AppSweep Report for Download
-        uses: actions/upload-artifact@v3
-        with:
-          name: appsweep-json-report
-          path: ${{ steps.appsweep-scan.outputs.build_url }}  # Upload the report URL (or file, if available)
+          input_file: Demo.apk
