@@ -15,6 +15,11 @@ jobs:
 
       - name: Set up Docker
         run: |
+          # Remove conflicting containerd package if exists
+          sudo apt-get remove --purge containerd
+          sudo apt-get autoremove --purge
+
+          # Install Docker dependencies
           sudo apt-get update
           sudo apt-get install -y docker.io
           sudo systemctl start docker
