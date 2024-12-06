@@ -13,21 +13,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Run AppSweep Scan
-        id: appsweep-scan
-        uses: guardsquare/appsweep-action@main
-        with:
-          appsweep_api_key: ${{ secrets.APPSWEEP_API_KEY }}
-          input_file: sample.apk
-          output_format: json  # Ensure JSON output format
+      - name: Install AppSweep CLI
+        run: |
+          curl -sL https://appsweep.io/cli/install | bash
+        shell: bash
 
-      - name: Display AppSweep Scan Results in Console
+      - name: Run AppSweep Scan (JSON Output)
+        run: |
+          appsweep scan --project BitbarSampleApp --api-key ${{ secrets.APPSWEEP_API_KEY }} --input-file sample.apk --output json > appsweep-report.json
+        env:
+          APPSWEEP_API_KEY: ${{ secrets.APPSWEEP_API_KEY }}
+
+      - name: Display AppSweep Scan JSON Results in Console
         run: |
           echo "AppSweep Scan JSON Results:"
-          cat ${{ steps.appsweep-scan.outputs.report_path }}  # Display the JSON report in the console
+          cat appsweep-report.json  # Display the JSON report in the console
 
       - name: Upload AppSweep JSON Report for Download
         uses: actions/upload-artifact@v3
         with:
           name: appsweep-json-report
-          path: ${{ steps.appsweep-scan.outputs.report_path }}  # Ensure correct path to the generated JSON report
+          path: appsweep-report.json  # Path to the generated JSON report
