@@ -24,7 +24,7 @@ jobs:
           
       - name: Clone MobSF repository
         run: |
-          git clone https://github.com/MobSF/Mobile-Security-Framework.git
+          git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git
           cd Mobile-Security-Framework
           git checkout latest
 
