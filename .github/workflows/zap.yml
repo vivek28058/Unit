@@ -13,20 +13,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.9'  # Updated to Python 3.9
 
-      # Step to use MobSF Scan plugin
+      # Run MobSF Scan
       - name: Run MobSF Scan
         uses: MobSF/mobsfscan@main
         with:
-          args: '.'  # Assuming the APK is in the root directory of the repo.
-        
-      # If you want to save the scan results as an artifact
+          args: '.'  # Assuming the APK is in the root directory of the repo
+
+      # Upload scan results as artifact
       - name: Upload Scan Results as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mobsf-scan-results
-          path: ./mobsf-reports/  # Ensure this is where MobSF saves the reports
+          path: ./mobsf-reports/  # Ensure this is the correct directory for scan results
