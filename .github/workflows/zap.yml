@@ -19,14 +19,15 @@ jobs:
         with:
           appsweep_api_key: ${{ secrets.APPSWEEP_API_KEY }}
           input_file: sample.apk
-          
-      - name: Display AppSweep Scan Results
+          output_format: json  # Specify that the output should be in JSON format
+
+      - name: Display AppSweep Scan Results in Console
         run: |
-          echo "AppSweep Scan Results:"
-          cat ${{ steps.appsweep-scan.outputs.report_path }} # Display the scan report in console
-          
-      - name: Upload AppSweep Report for Download
+          echo "AppSweep Scan JSON Results:"
+          cat ${{ steps.appsweep-scan.outputs.report_path }} # Display the JSON report in the console
+
+      - name: Upload AppSweep JSON Report for Download
         uses: actions/upload-artifact@v3
         with:
-          name: appsweep-report
-          path: ${{ steps.appsweep-scan.outputs.report_path }} # Path to the generated AppSweep report
+          name: appsweep-json-report
+          path: ${{ steps.appsweep-scan.outputs.report_path }} # Path to the generated JSON report
