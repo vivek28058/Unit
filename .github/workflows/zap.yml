@@ -21,13 +21,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git unzip
-          pip install -r https://raw.githubusercontent.com/MobSF/Mobile-Security-Framework/master/requirements.txt
-
+          
       - name: Clone MobSF repository
         run: |
           git clone https://github.com/MobSF/Mobile-Security-Framework.git
           cd Mobile-Security-Framework
           git checkout latest
+
+      - name: Install dependencies from MobSF repository
+        run: |
+          cd Mobile-Security-Framework
+          pip install -r requirements.txt
 
       - name: Start MobSF server
         run: |
@@ -36,7 +40,7 @@ jobs:
 
       - name: Upload APK to MobSF for scanning
         run: |
-          curl -X POST "http://localhost:8000/api/v1/upload" -F "file=sample.apk"
+          curl -X POST "http://localhost:8000/api/v1/upload" -F "file=@path_to_your_apk_file.apk"
 
       - name: Check Scan Status
         run: |
