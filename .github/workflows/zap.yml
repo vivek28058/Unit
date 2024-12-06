@@ -1,18 +1,32 @@
-name: mobsfscan
+name: MobSF APK Scan
 
 on:
   push:
-    branches: main
+    branches:
+      - main
 
 jobs:
-  build:
+  mobsf-scan:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4.2.2
-    - uses: actions/setup-python@v5.3.0
-      with:
-        python-version: '3.12'
-    - name: mobsfscan
-      uses: MobSF/mobsfscan@main
-      with:
-        args: '. --json'
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      # Step to use MobSF Scan plugin
+      - name: Run MobSF Scan
+        uses: MobSF/mobsfscan@main
+        with:
+          args: '.'  # Assuming the APK is in the root directory of the repo.
+        
+      # If you want to save the scan results as an artifact
+      - name: Upload Scan Results as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobsf-scan-results
+          path: ./mobsf-reports/  # Ensure this is where MobSF saves the reports
