@@ -1,4 +1,4 @@
-name: APK Security Scan
+name: APK Security Scan with MobSF
 
 on:
   push:
@@ -13,17 +13,16 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Set up Java 11 (Adoptium)
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adoptium'  # Use 'adoptium' instead of 'adoptopenjdk'
-
-      - name: Install Dependencies (QARK dependencies)
+      - name: Set up Docker
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip python3-dev git
-          pip3 install qark
+          sudo apt-get install -y docker.io
+          sudo systemctl start docker
+          sudo systemctl enable docker
+
+      - name: Pull MobSF Docker image
+        run: |
+          docker pull opensecurity/mobile-security-framework-mobsf:latest
 
       - name: Download APK from repository
         uses: actions/download-artifact@v3
@@ -31,8 +30,12 @@ jobs:
           name: sample
           path: ./apk
 
-      - name: Run QARK Security Scan
+      - name: Run MobSF scan on APK
         run: |
-          qark --apk ./apk/sample.apk --output ./qark-report
+          docker run --rm -v $(pwd)/apk:/apk opensecurity/mobile-security-framework-mobsf:latest -a /apk/sample.apk
 
-   
+      - name: Upload MobSF Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobsf-report
+          path: ./mobsf-report
