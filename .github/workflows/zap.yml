@@ -16,17 +16,40 @@ jobs:
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Updated to Python 3.9
+          python-version: '3.9'
 
-      # Run MobSF Scan
       - name: Run MobSF Scan
         uses: MobSF/mobsfscan@main
         with:
           args: '.'  # Assuming the APK is in the root directory of the repo
 
-      # Upload scan results as artifact
-      - name: Upload Scan Results as Artifact
+      - name: Extract Scan Results and Display in Summary
+        run: |
+          # Check if MobSF generated the report
+          REPORT_PATH="./mobsf-reports/report.json"
+          if [[ -f "$REPORT_PATH" ]]; then
+            echo "MobSF scan report found!"
+            # Example: Extract some relevant scan information (e.g., vulnerabilities, issues)
+            CRITICAL_ISSUES=$(jq '.critical_issues' $REPORT_PATH)
+            HIGH_ISSUES=$(jq '.high_issues' $REPORT_PATH)
+            MEDIUM_ISSUES=$(jq '.medium_issues' $REPORT_PATH)
+            
+            # Displaying results as annotations in the GitHub Actions summary
+            echo "::notice::Scan Summary"
+            echo "::notice::Critical Issues: $CRITICAL_ISSUES"
+            echo "::notice::High Issues: $HIGH_ISSUES"
+            echo "::notice::Medium Issues: $MEDIUM_ISSUES"
+            
+            # You can also format the output to show the full report in a group
+            echo "::group::Scan Report"
+            cat $REPORT_PATH
+            echo "::endgroup::"
+          else
+            echo "::error::No scan report found at $REPORT_PATH"
+          fi
+
+      - name: Upload Scan Results as Artifact (Optional)
         uses: actions/upload-artifact@v3
         with:
           name: mobsf-scan-results
-          path: ./mobsf-reports/  # Ensure this is the correct directory for scan results
+          path: ./mobsf-reports/
