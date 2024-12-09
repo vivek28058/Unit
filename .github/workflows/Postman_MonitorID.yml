@@ -16,5 +16,5 @@ jobs:
     - name: Trigger Postman Monitor
       run: |
         curl --request POST \
-          --url https://api.getpostman.com/monitors/{{monitor_id}}/run \
+          --url https://api.getpostman.com/monitors/${{ secrets.POSTMAN_MONITOR_ID }}/run \
           --header "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}"
