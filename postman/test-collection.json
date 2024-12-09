@@ -17,7 +17,7 @@
 						"exec": [
 							"pm.variables.set('foo', 'bar')",
 							"pm.variables.set('beverages', { tea: [ 'chai', 'matcha', 'oolong' ] })",
-							"pm.variables.set('answer', 43)"
+							"pm.variables.set('answer', 42)"
 						],
 						"type": "text/javascript"
 					}
