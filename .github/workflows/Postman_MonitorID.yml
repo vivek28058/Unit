@@ -1,0 +1,20 @@
+name: Trigger Postman Monitor
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Trigger Postman Monitor
+      run: |
+        curl --request POST \
+          --url https://api.getpostman.com/monitors/{{monitor_id}}/run \
+          --header "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}"
