@@ -14,7 +14,17 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Trigger Postman Monitor
+      id: trigger_monitor
       run: |
+        # Trigger the Postman Monitor and save the response as JSON
         curl --request POST \
           --url https://api.getpostman.com/monitors/${{ secrets.POSTMAN_MONITOR_ID }}/run \
-          --header "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}"
+          --header "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
+          --header "Content-Type: application/json" \
+          --output result.json
+
+    - name: Upload results as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: postman-monitor-results
+        path: result.json
