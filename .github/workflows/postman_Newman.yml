@@ -23,7 +23,7 @@ jobs:
 
     - name: Run Postman Tests
       run: |
-        newman run postman/test-collection.json \
+        newman run postman/Coffee House API.json \
           --reporters cli,json \
           --reporter-json-export postman-report.json
 
